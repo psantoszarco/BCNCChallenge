@@ -57,10 +57,10 @@ public class PriceServiceImpl implements PriceService {
     public Price getPriceByBrandProductAndDate(Long brandId, Long productId, LocalDateTime date) {
         Optional<Price> price = priceRepository.
                 getProductByBrandIdProductIdAndDate(brandId, productId, date);
-        if (price.isPresent()) {
-            return price.get();
-        } else {
+
+        if (!price.isPresent()) {
             throw new PriceNotFoundException("Price not found");
         }
+        return price.get();
     }
 }
